@@ -1,6 +1,7 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component} from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Post } from '../post.model';
+
+import { PostService } from '../post.service';
 
 @Component({
   selector: 'app-post-create',
@@ -11,8 +12,9 @@ export class PostCreateComponent {
 enteredTittle="";
 enteredContent="";
 
-@Output() postCreated = new EventEmitter<Post>();
 
+
+constructor(public PostService: PostService){}
 
 onAddPost(form:NgForm) {
   //no post will add if we click the submit button without any content in the two fields.
@@ -20,11 +22,8 @@ onAddPost(form:NgForm) {
     return;
   }
   // above function is used to submit the content with Data
-  const post: Post= {
-    tittle: form.value.tittle,
-    content: form.value.content
-  };
-  this.postCreated.emit(post);
+
+  this.PostService.addPost(form.value.tittle, form.value.content)
 
 }
 }
