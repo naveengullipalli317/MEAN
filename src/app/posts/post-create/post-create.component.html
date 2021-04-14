@@ -6,19 +6,21 @@
       name="tittle"
        ngModel
        required
+       placeholder="Tittle"
        #tittle="ngModel">
        <mat-error *ngIf="tittle.invalid">Please enter a post tittle</mat-error>
   </mat-form-field>
 
   <mat-form-field>
     <textarea
-    matInput rows = "4"
+    matInput rows ="4"
     name="content"
     ngModel
     required
+    placeholder="content"
     #content="ngModel">
   </textarea>
-      <mat-error *ngIf="content.invalid"> Please enter a post content</mat-error>>
+       <mat-error *ngIf="content.invalid"> Please enter a post content</mat-error>
   </mat-form-field>
   <button mat-raised-button
     color="accent"

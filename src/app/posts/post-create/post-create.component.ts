@@ -24,6 +24,6 @@ onAddPost(form:NgForm) {
   // above function is used to submit the content with Data
 
   this.PostService.addPost(form.value.tittle, form.value.content)
-
+ form.resetForm();
 }
 }
