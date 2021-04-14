@@ -12,9 +12,9 @@ import { MatExpansionModule} from '@angular/material/expansion';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PostCreateComponent } from './post-create/post-create.component';
+import { PostCreateComponent } from './posts/post-create/post-create.component';
 import { HeaderComponent } from './Header/header.component';
-import { PostListComponent } from './post-list/post-list.component';
+import { PostListComponent } from './posts/post-list/post-list.component';
 
 
 @NgModule({
