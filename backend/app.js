@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const Post = require ('./models/post')
 const app = express();
 
-const connectUrl = "mongodb+srv://Naveen:$India123.@cluster0.6mugj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const connectUrl = "mongodb+srv://Naveen:$India123.@cluster0.6mugj.mongodb.net/node-angular?retryWrites=true&w=majority";
 
 const connectConfig = {
   useNewUrlParser: true,
@@ -44,7 +44,7 @@ app.post("/api/posts", (req, res, next)=>{
     tittle: req.body.tittle,
     content: req.body.content
   });
-  console.log(post);
+  post.save();
   res.status(201).json({
     message:'Post added successfully'
   });
