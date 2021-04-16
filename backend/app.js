@@ -2,7 +2,8 @@ const express = require('express');
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
 
-const Post = require ('./models/post')
+const Post = require ('./models/post');
+const { createShorthandPropertyAssignment } = require('typescript');
 const app = express();
 
 const connectUrl = "mongodb+srv://Naveen:$India123.@cluster0.6mugj.mongodb.net/node-angular?retryWrites=true&w=majority";
@@ -44,10 +45,13 @@ app.post("/api/posts", (req, res, next)=>{
     tittle: req.body.tittle,
     content: req.body.content
   });
-  post.save();
-  res.status(201).json({
-    message:'Post added successfully'
+  post.save().then(createdPost => {
+    res.status(201).json({
+      message:"Post added successfully",
+      postId: createdPost._id
   });
+  });
+
 });
 
 app.get('/api/posts', (req, res, next) => {
