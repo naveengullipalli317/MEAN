@@ -1,8 +1,13 @@
 <mat-toolbar color="primary">
-  <span><a routerLink="/">MEAN Stack App </a></span>
+  <span>
+    <a routerLink="/">MEAN Stack App </a>
+  </span>
+  <span class = "spacer">  </span>
   <ul>
     <li>
-      <a routerLink = "/create">New Post</a>
+
+      <a mat-button routerLink = "/create" routerLinkActive="mat-accent">New Post</a>
+       <!-- to create the highlighter for the new post "mat- accent"-->
     </li>
   </ul>
 </mat-toolbar>
