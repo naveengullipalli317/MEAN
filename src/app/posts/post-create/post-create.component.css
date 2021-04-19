@@ -13,3 +13,13 @@ input[type="file"] {
 button[type="submit"] {
   margin-top: 2rem;
 }
+
+.image-preview {
+  height: 5rem;
+  margin: 1rem 0;
+}
+
+.image-preview image {
+  height: 100%;
+
+}
