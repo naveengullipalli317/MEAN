@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormControl, FormGroup, Validators} from '@angular/forms';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Post } from '../post.model';
 
@@ -13,21 +13,38 @@ import { PostService } from '../post.service';
 export class PostCreateComponent implements OnInit {
 enteredTittle="";
 enteredContent="";
+form: FormGroup;
+
 private mode = 'create';
 private postId: string;
  post: Post;
 
 
-constructor(public PostService: PostService, public route:ActivatedRoute){}
+constructor(
+  public PostService: PostService,
+  public route:ActivatedRoute
+  ) {}
 
 ngOnInit() {
+  this.form = new FormGroup({
+    'tittle' : new FormControl(null, {validators: [Validators.required, Validators.minLength(3)]}),
+    'content' : new FormControl(null, {validators:[Validators.required]})
+  });
   this.route.paramMap.subscribe((paramMap: ParamMap) => {
     if (paramMap.has('postId')){
       this.mode = 'edit';
       this.postId = paramMap.get('postId');
       this.PostService.getPost('this.postId').subscribe(postData => {
-        this.post = {id:postData._id, tittle: postData.tittle, content: postData.content};
+        this.post = {id:postData._id,
+                    tittle: postData.tittle,
+                    content: postData.content};
+
+        this.form.setValue({
+          'tittle': this.post.tittle,
+          'content': this.post.content
+        });
       });
+
 
     }else {
       this.mode ='create';
@@ -36,22 +53,22 @@ ngOnInit() {
   });
 }
 
-onSavePost(form:NgForm) {
+onSavePost() {
   //no post will add if we click the submit button without any content in the two fields.
-  if(form.invalid){
+  if(this.form.invalid){
     return;
   }
   if(this.mode === 'create') {
-    this.PostService.addPost(form.value.tittle, form.value.content);
+    this.PostService.addPost(this.form.value.tittle, this.form.value.content);
   } else {
     this.PostService.updatePost(
         this.postId,
-        form.value.tittle,
-        form.value.content);
+        this.form.value.tittle,
+        this.form.value.content);
   }
   // above function is used to submit the content with Data
 
 
- form.resetForm();
+ this.form.reset();
 }
 }
