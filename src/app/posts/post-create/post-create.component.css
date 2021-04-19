@@ -5,4 +5,11 @@ textarea{
   width: 100%;
 }
 
+input[type="file"] {
 
+  visibility: hidden;
+}
+
+button[type="submit"] {
+  margin-top: 2rem;
+}
