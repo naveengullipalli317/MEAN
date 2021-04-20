@@ -6,7 +6,7 @@ const postsRoutes = require("./routes/posts");
 
 const app = express();
 
-const connectUrl = "mongodb+srv://Naveen:password@cluster0.6mugj.mongodb.net/node-angular?retryWrites=true&w=majority";
+const connectUrl = "mongodb+srv://Naveen:$India123.@cluster0.6mugj.mongodb.net/node-angular?retryWrites=true&w=majority";
 
 const connectConfig = {
   useNewUrlParser: true,
