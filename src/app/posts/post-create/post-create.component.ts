@@ -42,7 +42,8 @@ ngOnInit() {
       this.PostService.getPost('this.postId').subscribe(postData => {
         this.post = {id:postData._id,
                     tittle: postData.tittle,
-                    content: postData.content};
+                    content: postData.content,
+                    imagePath: null};
 
         this.form.setValue({
           'tittle': this.post.tittle,
