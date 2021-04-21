@@ -59,7 +59,7 @@ router.put("/:id",
       const url = req.protocol + '://' + req.get("host");
       imagePath = url + "/images/" + req.file.filename
     }
-    const post =({
+    const post = ({
     _id: req.body.id,
     tittle: req.body.tittle,
     content: req.body.content,
@@ -73,13 +73,23 @@ router.put("/:id",
 });
 
 router.get("", (req, res, next) => {
-
-  Post.find()
-    .then(documents=> {
+  const pageSize = +req.query.pagesize;
+  const currentPage = +req.query.page;
+  const postQuery = Post.find();
+  // for extremely large databases this if function will allow multiple number of files with pagination
+  if(pageSize && currentPage) {
+    postQuery
+      .skip(pageSize * (currentPage - 1))
+      .limit(pageSize);
+  }
+  postQuery.then(documents=> {
       res.status(200).json({
         message:'Post fetched succesfully',
         posts: documents
     });
+  });
+
+});
 
  /*  const posts = [
     { id: 'qweqwheqlwkehq',
@@ -99,9 +109,7 @@ router.get("", (req, res, next) => {
 
   ]; */
 
-  });
 
-});
 
 router.get("/:id", (req, res, next) => {
   Post.findById(req.params.id).then(post => {
