@@ -75,7 +75,10 @@ onSavePost() {
     return;
   }
   if(this.mode === 'create') {
-    this.PostService.addPost(this.form.value.tittle, this.form.value.content);
+    this.PostService.addPost
+    (this.form.value.tittle,
+    this.form.value.content,
+    this.form.value.image);
   } else {
     this.PostService.updatePost(
         this.postId,

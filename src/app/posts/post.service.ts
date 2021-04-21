@@ -40,22 +40,27 @@ export class PostService {
   }
 
 
-  addPost(tittle: string, content:string) {
-  const post: Post = { id: null, tittle: tittle, content: content };
-  this.http
-    .post<{ message: string, postId: string }>("http://localhost:3000/api/posts", post)
-    .subscribe(responseData => {
+  addPost(tittle: string, content:string, image: File) {
+      //json cannot add file so instead of sending json we send form data
+      /* const post: Post = { id: null, tittle: tittle, content: content }; */
+     const postData = new FormData();
+     postData.append("tittle", tittle);
+     postData.append("content", content);
+     postData.append("image", image, tittle);
+        this.http
+       .post<{ message: string, postId: string }>("http://localhost:3000/api/posts", postData)
+       .subscribe(responseData => {
      /*  console.log(responseData.message); */
-        const id = responseData.postId;
-        post.id = id;
+        const post: Post = {id: responseData.postId, tittle: tittle, content: content};
+
         this.posts.push(post);
         this.postsUpdated.next([...this.posts]);
   });
 }
 
   updatePost(id:string, tittle:string, content:string) {
-    const post: Post = { id:id, tittle:tittle, content: content};
-    this.http.
+      const post: Post = { id:id, tittle:tittle, content: content};
+        this.http.
         put("http://localhost:3000/api/posts/"+ id, post)
         .subscribe(response => {
           const updatedPosts =  [...this.posts];
@@ -68,11 +73,11 @@ export class PostService {
   }
 
   deletePost(postId: string) {
-  this.http.delete("http://localhost:3000/api/posts/"+ postId)
-  .subscribe(()=>{
-    const updatedPosts = this.posts.filter(post=> post.id !==postId);
-    this.posts = updatedPosts;
-    this.postsUpdated.next([...this.posts]);
+       this.http.delete("http://localhost:3000/api/posts/"+ postId)
+      .subscribe(()=>{
+      const updatedPosts = this.posts.filter(post=> post.id !==postId);
+      this.posts = updatedPosts;
+      this.postsUpdated.next([...this.posts]);
   });
 }
 }
