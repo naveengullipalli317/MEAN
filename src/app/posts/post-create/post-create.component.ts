@@ -43,11 +43,12 @@ ngOnInit() {
         this.post = {id:postData._id,
                     tittle: postData.tittle,
                     content: postData.content,
-                    imagePath: null};
+                    imagePath: postData.imagePath};
 
         this.form.setValue({
           'tittle': this.post.tittle,
-          'content': this.post.content
+          'content': this.post.content,
+          'image': this.post.imagePath
         });
       });
 
@@ -84,7 +85,8 @@ onSavePost() {
     this.PostService.updatePost(
         this.postId,
         this.form.value.tittle,
-        this.form.value.content);
+        this.form.value.content,
+        this.form.value.image);
   }
   // above function is used to submit the content with Data
 
