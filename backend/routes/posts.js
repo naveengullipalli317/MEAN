@@ -76,16 +76,22 @@ router.get("", (req, res, next) => {
   const pageSize = +req.query.pagesize;
   const currentPage = +req.query.page;
   const postQuery = Post.find();
-  // for extremely large databases this if function will allow multiple number of files with pagination
+  let fetchedPosts;
+  // for extremely large databases this if function will allow multiple number of files(narrow down the number of documents) with pagination
   if(pageSize && currentPage) {
     postQuery
       .skip(pageSize * (currentPage - 1))
       .limit(pageSize);
   }
   postQuery.then(documents=> {
-      res.status(200).json({
+    fetchedPosts = documents;
+    return Post.count();
+  })
+  .then(count => {
+     res.status(200).json({
         message:'Post fetched succesfully',
-        posts: documents
+        posts: fetchedPosts,
+        maxPosts: count
     });
   });
 
