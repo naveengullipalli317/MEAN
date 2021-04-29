@@ -21,6 +21,7 @@ import { HeaderComponent } from './Header/header.component';
 import { PostListComponent } from './posts/post-list/post-list.component';
 import { HttpClientModule} from '@angular/common/http';
 import { LoginComponent } from './auth/login/login.component';
+import { SignupComponent } from './auth/signup/signup.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { LoginComponent } from './auth/login/login.component';
     HeaderComponent,
     PostListComponent,
     PostCreateComponent,
-    LoginComponent
+    LoginComponent,
+    SignupComponent
 
   ],
   imports: [
