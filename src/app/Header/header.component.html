@@ -4,19 +4,23 @@
   </span>
   <span class = "spacer">  </span>
   <ul>
-    <li>
-
+    <li *ngIf="userIsAuthenticted">
       <a mat-button routerLink = "/create" routerLinkActive="mat-accent">New Post</a>
        <!-- to create the highlighter for the new post "mat- accent"-->
     </li>
-    <li>
 
+    <li *ngIf="!userIsAuthenticted">
       <a mat-button routerLink = "/login" routerLinkActive="mat-accent">Login</a>
        <!-- to create the highlighter for the new post "mat- accent"-->
     </li>
-    <li>
 
+    <li *ngIf="!userIsAuthenticted">
       <a mat-button routerLink = "/signup" routerLinkActive="mat-accent">Signup</a>
+       <!-- to create the highlighter for the new post "mat- accent"-->
+    </li>
+
+    <li *ngIf="userIsAuthenticted">
+    <button mat-button>Logout</button>
        <!-- to create the highlighter for the new post "mat- accent"-->
     </li>
   </ul>
