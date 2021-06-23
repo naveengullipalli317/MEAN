@@ -15,6 +15,7 @@ constructor(public authService: Authservice) {}
   if (form.invalid) {
     return;
  }
+ this.isLoading = true;
  this.authService.createUser(form.value.email, form.value.password);
 }
 }
