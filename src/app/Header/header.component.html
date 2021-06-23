@@ -20,7 +20,7 @@
     </li>
 
     <li *ngIf="userIsAuthenticted">
-    <button mat-button>Logout</button>
+    <button mat-button (click)="onLogout()">Logout</button>
        <!-- to create the highlighter for the new post "mat- accent"-->
     </li>
   </ul>

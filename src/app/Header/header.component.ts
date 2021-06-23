@@ -22,6 +22,9 @@ ngOnInit() {
     });
 
 }
+onLogout() {
+  this.authservice.logout();
+}
 
 ngOnDestroy() {
   this.authListenerSubs.unsubscribe();
