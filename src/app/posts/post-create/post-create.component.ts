@@ -43,7 +43,9 @@ ngOnInit() {
         this.post = {id:postData._id,
                     tittle: postData.tittle,
                     content: postData.content,
-                    imagePath: postData.imagePath};
+                    imagePath: postData.imagePath,
+                    creator: postData.creator
+                  };
 
         this.form.setValue({
           'tittle': this.post.tittle,

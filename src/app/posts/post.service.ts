@@ -29,7 +29,7 @@ export class PostService {
             creator: post.creator
           };
         }),
-         maxPost: postData.maxPosts};
+         maxPosts: postData.maxPosts};
     })
     )
     .subscribe(transformedPostData=> {
@@ -37,7 +37,7 @@ export class PostService {
       this.posts = transformedPostData.posts;
       this.postsUpdated.next({
         posts: [...this.posts],
-        postCount: transformedPostData.maxPost
+        postCount: transformedPostData.maxPosts
     });
     });
   }
@@ -47,7 +47,7 @@ export class PostService {
   }
 
   getPost(id: string) {
-    return this.http.get<{_id:string, tittle:string, content:string, imagePath: string}>("http://localhost:3000/api/posts/"+ id);
+    return this.http.get<{_id:string, tittle:string, content:string, imagePath: string, creator: string}>("http://localhost:3000/api/posts/"+ id);
   }
 
 
@@ -87,7 +87,8 @@ export class PostService {
           id: id,
           tittle: tittle,
           content: content,
-          imagePath: image
+          imagePath: image,
+          creator: null
         };
       }
 
