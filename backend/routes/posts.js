@@ -51,7 +51,12 @@ checkAuth,
         content: createdPost.content,
         imagePath: createdPost.imagePath */
       }
-  });
+    });
+  })
+  .catch(error => {
+    res.status(500).json({
+      message: "Creating a post failed"
+    });
   });
 
 });
@@ -78,9 +83,12 @@ checkAuth,
       } else {
         res.status(401).json({message: 'Not authorized'});
       }
-
-
-  });
+    })
+    .catch(error => {
+      res.status(500).json({
+        message: "couldnt update post"
+      });
+    });
 });
 
 router.get("", (req, res, next) => {
@@ -103,6 +111,11 @@ router.get("", (req, res, next) => {
         message:'Post fetched succesfully',
         posts: fetchedPosts,
         maxPosts: count
+    });
+  })
+  .catch(error => {
+    res.status(500).json({
+      message: "fetching post failed"
     });
   });
 
@@ -146,7 +159,11 @@ router.delete("/:id",checkAuth, (req, res, next) => {
     } else {
       res.status(401).json({message: 'Not authorized'});
     }
-  res.status(200).json({message: "post deleted"});
+})
+.catch(error => {
+  res.status(500).json({
+    message: "fetching post failed"
+  });
 });
 });
 
