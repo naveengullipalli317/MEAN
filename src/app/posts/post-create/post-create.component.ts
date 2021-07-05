@@ -6,6 +6,8 @@ import { mimeType } from './mime-type.validator';
 import { Post } from '../post.model';
 
 import { PostService } from '../post.service';
+import { Subscription } from 'rxjs';
+
 
 
 @Component({
@@ -16,17 +18,22 @@ import { PostService } from '../post.service';
 export class PostCreateComponent implements OnInit {
 enteredTittle="";
 enteredContent="";
+post: Post;
+
+
 form: FormGroup;
 imagePreview: string;
 
 private mode = 'create';
 private postId: string;
- post: Post;
+private authStatusSub: Subscription;
+
 
 
 constructor(
   public PostService: PostService,
-  public route:ActivatedRoute
+  public route:ActivatedRoute,
+
   ) {}
 
 ngOnInit() {
