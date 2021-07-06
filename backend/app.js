@@ -8,7 +8,7 @@ const userRoutes = require("./routes/user")
 
 const app = express();
 
-const connectUrl = "mongodb+srv://Naveen:$Mongo123.@cluster0.6mugj.mongodb.net/node-angular";
+const connectUrl = "mongodb+srv://Naveen:"+ process.env.MONGO_ATLAS_PW+"@cluster0.6mugj.mongodb.net/node-angular";
 
 const connectConfig = {
   useNewUrlParser: true,
